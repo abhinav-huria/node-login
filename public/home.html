@@ -1,0 +1,23 @@
+<h1 id="name">Hello</h1>
+<a href="/auth" id="btn">My Account</button>
+
+
+<script>
+    var link = document.getElementById( "btn" );
+    var h1 = document.getElementById( "name" );
+
+    function getRequest(){
+        var request = new XMLHttpRequest();
+        request.open( "GET" , "/getUser" );
+        request.send();
+        request.addEventListener( 'load', () => {
+          if( request.status === 200 ){
+             var data = request.responseText ? JSON.parse( request.responseText ) : null;
+             link.innerText = data ? "Logout" : "Login/Sign Up";
+             h1.innerText = data ? "Hi " + data : "Hi User";
+          }
+       })
+    }
+
+    getRequest();
+</script>
